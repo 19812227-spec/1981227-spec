@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sistema de Parqueo Escolar</title>
+<style>
+body{font-family:Arial;background:#e8f5e9;margin:0;padding:20px}
+.container{max-width:650px;background:white;margin:auto;padding:20px;border-radius:15px;box-shadow:0 4px 10px rgba(0,0,0,0.2)}
+h1{color:#2e7d32;text-align:center}
+p{text-align:center;color:#555}
+input,button,select{width:100%;padding:12px;margin:8px 0;box-sizing:border-box;border-radius:8px;border:1px solid #ccc;font-size:16px}
+button{background:#2e7d32;color:white;border:none;cursor:pointer;font-weight:bold}
+button:hover{background:#1b5e20}
+.carro{background:#f1f8e9;padding:12px;margin:10px 0;border-left:5px solid #2e7d32;border-radius:8px}
+.carro b{color:#2e7d32}
+.salida{background:#c62828;padding:6px 12px;width:auto;float:right;border-radius:5px;font-size:12px}
+.contador{text-align:center;background:#c8e6c9;padding:10px;border-radius:10px;margin:10px 0;font-weight:bold}
+</style>
+</head>
+<body>
+<div class="container">
+<h1>🅿️ Sistema de Parqueo Escolar</h1>
+<p>Sistema chiquito para el parqueo de las escuelas</p>
+
+<div class="contador" id="contador">Espacios ocupados: 0 / 20</div>
+
+<input type="text" id="placa" placeholder="Placa del carro (Ej: P123-456)">
+<input type="text" id="propietario" placeholder="Nombre del propietario">
+<select id="tipo">
+<option value="">Tipo de vehículo</option>
+<option value="Carro">Carro</option>
+<option value="Moto">Moto</option>
+<option value="Bus Escolar">Bus Escolar</option>
+<option value="Bicicleta">Bicicleta</option>
+</select>
+<input type="time" id="horaEntrada">
+
+<button onclick="ingresar()">🚗 Ingresar Vehículo</button>
+
+<div id="lista"></div>
+</div>
+
+<script>
+let parqueo = JSON.parse(localStorage.getItem('parqueoEscuela')) || [];
+const LIMITE = 20;
+
+function ingresar(){
+let placa = document.getElementById('placa').value;
+let propietario = document.getElementById('propietario').value;
+let tipo = document.getElementById('tipo').value;
+let hora = document.getElementById('horaEntrada').value;
+
+if(placa=='' || propietario=='' || tipo=='' || hora
